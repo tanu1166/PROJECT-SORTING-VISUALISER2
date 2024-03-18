@@ -4,7 +4,7 @@ const initializer = {
    algorithm: 'bubble',
    color: '#35c6ff',
    speed: 100,
-   range: '60',
+   range: '100',
    play: false,
    values: [],
    timeouts:[]

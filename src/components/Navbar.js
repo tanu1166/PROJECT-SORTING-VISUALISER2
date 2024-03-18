@@ -43,7 +43,7 @@ function Sidebar() {
     }
   }, [myState.play]);
 
-  const [max, setMax] = useState(30);
+  const [max, setMax] = useState(60);
 
   const handleAlgo = (algo) => {
     dispatch({
@@ -90,7 +90,7 @@ function Sidebar() {
   };
 
   useEffect(() => {
-    handleRange(30);
+    handleRange(60);
   }, []);
 
   useEffect(() => {
@@ -101,8 +101,8 @@ function Sidebar() {
   }, [myState.values]);
 
   const handleWidth = () => {
-    if (window.innerWidth > 1300) setMax(100);
-    else if (window.innerWidth > 1200) setMax(60);
+    if (window.innerWidth > 1300) setMax(120);
+    else if (window.innerWidth > 1200) setMax(100);
     else if (window.innerWidth > 1100) setMax(50);
     else if (window.innerWidth > 900) setMax(45);
     else if (window.innerWidth > 800) setMax(40);
@@ -118,8 +118,36 @@ function Sidebar() {
 
   return (
     <div className="sidebar">
+      <div className="hero">
+        <h1 className="title">S O R T I F Y !</h1>
+      </div>
       <div className="arrayParameters">
         <div className="sidebar__option">
+          <div className="optionTitle">
+            <div
+              className="optionColor"
+              style={{ backgroundColor: "orange" }}
+            ></div>
+            <p>Select Algorithm</p>
+          </div>
+          <div className="optionDropdown">
+            <select
+              class="form-select"
+              name="algo"
+              id="algo"
+              onChange={(e) => handleAlgo(e.target.value)}
+              disabled={myState.play ? true : false}
+            >
+              <option selected>Select Algo</option>
+              <option value="bubble">Bubble Sort </option>
+              <option value="merge">Merge Sort</option>
+              <option value="insertion">Insertion Sort</option>
+              <option value="selection">Selection Sort</option>
+              <option value="quick">Quick Sort</option>
+            </select>
+          </div>
+        </div>
+        {/* <div className="sidebar__option">
           <label htmlFor="algo">Select Algorithm: </label>
           <select
             name="algo"
@@ -133,76 +161,103 @@ function Sidebar() {
             <option value="selection">Selection Sort</option>
             <option value="quick">Quick Sort</option>
           </select>
+        </div> */}
+
+        <div className="sidebar__option">
+          <div className="optionTitle">
+            <div
+              className="optionColor"
+              style={{ backgroundColor: "cornsilk" }}
+            ></div>
+            <p>Select Range</p>
+          </div>
+          <div className="optionDropdown">
+            <Slider
+              style={{ width: "180px" }}
+              size="small"
+              defaultValue={60}
+              id="slider"
+              min={1}
+              className="slider"
+              disabled={myState.play ? true : false}
+              max={max}
+              onChange={(e) => handleRange(e.target.value)}
+              valueLabelDisplay="auto"
+            />
+          </div>
         </div>
 
         <div className="sidebar__option">
-          <label htmlFor="range">Range: </label>
-          <Slider
-            style={{ width: "180px" }}
-            size="small"
-            defaultValue={30}
-            id="slider"
-            min={1}
-            className="slider"
-            disabled={myState.play ? true : false}
-            max={max}
-            onChange={(e) => handleRange(e.target.value)}
-            valueLabelDisplay="auto"
-          />
-        </div>
-
-        <div className="sidebar__option">
-          <label htmlFor="color">Color: </label>
-          <select
-            name="color"
-            id="color"
-            onChange={(e) => handleColor(e.target.value)}
-            disabled={myState.play ? true : false}
-          >
-            <option
-              value="rgb(0, 149, 199)"
-              style={{ color: "rgb(0, 149, 199)" }}
+          <div className="optionTitle">
+            <div
+              className="optionColor"
+              style={{ backgroundColor: "blue" }}
+            ></div>
+            <p>Select Color</p>
+          </div>
+          <div className="optionDropdown">
+            <select
+              name="color"
+              id="color"
+              onChange={(e) => handleColor(e.target.value)}
+              disabled={myState.play ? true : false}
             >
-              Blue
-            </option>
-            <option value="rgb(85, 212, 0)" style={{ color: "rgb(10,200,20)" }}>
-              Green
-            </option>
-            <option value="rgb(255, 112, 112)" style={{ color: "red" }}>
-              Red
-            </option>
-            <option value="grey" style={{ color: "grey" }}>
-              Black
-            </option>
-            <option value="#ddd902" style={{ color: "#ddd902" }}>
-              Yellow
-            </option>
-          </select>
+              <option
+                value="rgb(0, 149, 199)"
+                style={{ color: "rgb(0, 149, 199)" }}
+              >
+                Blue
+              </option>
+              <option
+                value="rgb(85, 212, 0)"
+                style={{ color: "rgb(10,200,20)" }}
+              >
+                Green
+              </option>
+              <option value="rgb(255, 112, 112)" style={{ color: "red" }}>
+                Red
+              </option>
+              <option value="grey" style={{ color: "grey" }}>
+                Black
+              </option>
+              <option value="#ddd902" style={{ color: "#ddd902" }}>
+                Yellow
+              </option>
+            </select>
+          </div>
         </div>
 
         <div className="sidebar__option">
-          <label htmlFor="speed">Speed: </label>
-          <select
-            name="speed"
-            defaultValue={100}
-            id="speed"
-            onChange={(e) => handleSpeed(e.target.value)}
-            disabled={myState.play ? true : false}
-          >
-            <option value={500}>Slow</option>
-            <option value={200}>Medium</option>
-            <option value={100}>Fast</option>
-            <option value={20}>Super Fast</option>
-            <option value={5}>Ultra Fast</option>
-          </select>
+          <div className="optionTitle">
+            <div
+              className="optionColor"
+              style={{ backgroundColor: "black" }}
+            ></div>
+            <p>Select Speed</p>
+          </div>
+          <div className="optionDropdown">
+            <select
+              name="speed"
+              defaultValue={100}
+              id="speed"
+              onChange={(e) => handleSpeed(e.target.value)}
+              disabled={myState.play ? true : false}
+            >
+              <option value={500}>Slow</option>
+              <option value={200}>Medium</option>
+              <option value={100}>Fast</option>
+              <option value={20}>Super Fast</option>
+              <option value={5}>Ultra Fast</option>
+            </select>
+          </div>
         </div>
       </div>
       <div className="functions">
         <button id="change-btn" onClick={changeValues}>
-          change values
+          Change Values
         </button>
         <button id="play-btn" onClick={() => handlePlayPause(true)}>
-          play
+          Sort!
         </button>
       </div>
     </div>
