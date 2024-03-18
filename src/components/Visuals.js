@@ -7,6 +7,7 @@ import MergeSort from "./MergeSort";
 import SelectionSort from "./SelectionSort";
 
 import "./Visuals.css";
+import Timer from "./Timer";
 
 function Visuals() {
   const myState = useSelector((state) => state.updateProps);
@@ -107,6 +108,7 @@ function Visuals() {
       <MergeSort />
       <QuickSort />
       <SelectionSort />
+      {/* <Timer/> */}
     </div>
   );
 }

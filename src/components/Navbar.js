@@ -19,11 +19,17 @@ function Sidebar() {
 
   const handlePlayPause = (play) => {
     if (!myState.play) {
+      setStart(true);
       document.getElementById("change-btn").disabled = true;
       document.getElementById("change-btn").style.backgroundColor = "grey";
       document.getElementById("play-btn").disabled = true;
       document.getElementById("play-btn").style.backgroundColor = "grey";
     } else {
+      setStart(false);
+      dispatch({
+        type: "PLAY_PAUSE",
+        _play: play,
+      });
       return;
     }
     dispatch({
@@ -115,6 +121,22 @@ function Sidebar() {
     window.addEventListener("resize", handleWidth);
     return () => window.removeEventListener("resize", handleWidth);
   }, []);
+
+  const [time, setTime] = useState(0);
+  const [start, setStart] = useState(false);
+
+  useEffect(() => {
+    let interval = null;
+
+    if (start) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 10);
+      }, 10);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [start]);
 
   return (
     <div className="sidebar">
@@ -252,13 +274,43 @@ function Sidebar() {
           </div>
         </div>
       </div>
-      <div className="functions">
-        <button id="change-btn" onClick={changeValues}>
-          Change Values
-        </button>
-        <button id="play-btn" onClick={() => handlePlayPause(true)}>
-          Sort!
-        </button>
+      <div className="buttonsAndTimer">
+        <div className="functions">
+          <button id="change-btn" onClick={changeValues}>
+            Change Values
+          </button>
+          <button id="play-btn" onClick={() => handlePlayPause(true)}>
+            Sort!
+          </button>
+          <button id="play-btn" onClick={() => handlePlayPause(false)}>
+            Stop
+          </button>
+        </div>
+        <div className="timerDiv">
+          <p className="timeDataCont">
+            <span className="timeData">
+              {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:
+            </span>
+            <span className="timeData">
+              {("0" + Math.floor((time / 1000) % 60)).slice(-2)}:
+            </span>
+            <span className="timeData">
+              {("0" + ((time / 10) % 1000)).slice(-2)}
+            </span>
+          </p>
+          {/* <div>
+            <button onClick={() => setStart(true)}>Start</button>
+            <button onClick={() => setStart(false)}>Stop</button>
+            <button
+              onClick={() => {
+                setTime(0);
+                setStart(false);
+              }}
+            >
+              Reset
+            </button>
+          </div> */}
+        </div>
       </div>
     </div>
   );
