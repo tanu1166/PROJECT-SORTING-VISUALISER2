@@ -170,21 +170,6 @@ function Sidebar() {
               </select>
             </div>
           </div>
-          {/* <div className="sidebar__option">
-          <label htmlFor="algo">Select Algorithm: </label>
-          <select
-            name="algo"
-            id="algo"
-            onChange={(e) => handleAlgo(e.target.value)}
-            disabled={myState.play ? true : false}
-          >
-            <option value="bubble">Bubble Sort </option>
-            <option value="merge">Merge Sort</option>
-            <option value="insertion">Insertion Sort</option>
-            <option value="selection">Selection Sort</option>
-            <option value="quick">Quick Sort</option>
-          </select>
-        </div> */}
 
           <div className="sidebar__option">
             <div className="optionTitle">
@@ -481,18 +466,6 @@ function Sidebar() {
                       {("0" + ((time / 10) % 1000)).slice(-2)}
                     </span>
                   </p>
-                  {/* <div>
-            <button onClick={() => setStart(true)}>Start</button>
-            <button onClick={() => setStart(false)}>Stop</button>
-            <button
-              onClick={() => {
-                setTime(0);
-                setStart(false);
-              }}
-            >
-              Reset
-            </button>
-          </div> */}
                 </div>
               </div>
             </div>

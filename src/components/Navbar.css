@@ -145,21 +145,7 @@ select {
 }
 
 @media only screen and (max-width: 1000px) {
-  /* .sidebar {
-    width: 200px;
-  }
 
-  .sidebar__option {
-    padding: 10px;
-  }
-
-  select {
-    font-size: 0.8rem;
-  }
-
-  label {
-    font-size: 0.9rem;
-  } */
 }
 
 @media only screen and (max-width: 600px) {
