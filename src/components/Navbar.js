@@ -25,7 +25,6 @@ function Sidebar() {
       document.getElementById("play-btn").disabled = true;
       document.getElementById("play-btn").style.backgroundColor = "grey";
     } else {
-      setStart(false);
       dispatch({
         type: "PLAY_PAUSE",
         _play: play,
@@ -46,6 +45,7 @@ function Sidebar() {
       document.getElementById("change-btn").disabled = false;
       document.getElementById("change-btn").style.backgroundColor =
         "rgb(0, 149, 199)";
+      setStart(false);
     }
   }, [myState.play]);
 
@@ -96,7 +96,7 @@ function Sidebar() {
   };
 
   useEffect(() => {
-    handleRange(60);
+    handleRange(max);
   }, []);
 
   useEffect(() => {
@@ -139,37 +139,38 @@ function Sidebar() {
   }, [start]);
 
   return (
-    <div className="sidebar">
-      <div className="hero">
-        <h1 className="title">S O R T I F Y !</h1>
-      </div>
-      <div className="arrayParameters">
-        <div className="sidebar__option">
-          <div className="optionTitle">
-            <div
-              className="optionColor"
-              style={{ backgroundColor: "orange" }}
-            ></div>
-            <p>Select Algorithm</p>
-          </div>
-          <div className="optionDropdown">
-            <select
-              class="form-select"
-              name="algo"
-              id="algo"
-              onChange={(e) => handleAlgo(e.target.value)}
-              disabled={myState.play ? true : false}
-            >
-              <option selected>Select Algo</option>
-              <option value="bubble">Bubble Sort </option>
-              <option value="merge">Merge Sort</option>
-              <option value="insertion">Insertion Sort</option>
-              <option value="selection">Selection Sort</option>
-              <option value="quick">Quick Sort</option>
-            </select>
-          </div>
+    <>
+      <div className="sidebar">
+        <div className="hero">
+          <h1 className="title">S O R T I F Y !</h1>
         </div>
-        {/* <div className="sidebar__option">
+        <div className="arrayParameters">
+          <div className="sidebar__option">
+            <div className="optionTitle">
+              <div
+                className="optionColor"
+                style={{ backgroundColor: "orange" }}
+              ></div>
+              <p>Select Algorithm</p>
+            </div>
+            <div className="optionDropdown">
+              <select
+                class="form-select"
+                name="algo"
+                id="algo"
+                onChange={(e) => handleAlgo(e.target.value)}
+                disabled={myState.play ? true : false}
+              >
+                {/* <option selected>Select Algo</option> */}
+                <option value="bubble">Bubble Sort </option>
+                <option value="merge">Merge Sort</option>
+                <option value="insertion">Insertion Sort</option>
+                <option value="selection">Selection Sort</option>
+                <option value="quick">Quick Sort</option>
+              </select>
+            </div>
+          </div>
+          {/* <div className="sidebar__option">
           <label htmlFor="algo">Select Algorithm: </label>
           <select
             name="algo"
@@ -185,120 +186,125 @@ function Sidebar() {
           </select>
         </div> */}
 
-        <div className="sidebar__option">
-          <div className="optionTitle">
-            <div
-              className="optionColor"
-              style={{ backgroundColor: "cornsilk" }}
-            ></div>
-            <p>Select Range</p>
+          <div className="sidebar__option">
+            <div className="optionTitle">
+              <div
+                className="optionColor"
+                style={{ backgroundColor: "cornsilk" }}
+              ></div>
+              <p>Select Range</p>
+            </div>
+            <div className="optionDropdown">
+              <Slider
+                style={{ width: "180px" }}
+                size="small"
+                defaultValue={60}
+                id="slider"
+                min={1}
+                className="slider"
+                disabled={myState.play ? true : false}
+                max={max}
+                onChange={(e) => handleRange(e.target.value)}
+                valueLabelDisplay="auto"
+              />
+            </div>
           </div>
-          <div className="optionDropdown">
-            <Slider
-              style={{ width: "180px" }}
-              size="small"
-              defaultValue={60}
-              id="slider"
-              min={1}
-              className="slider"
-              disabled={myState.play ? true : false}
-              max={max}
-              onChange={(e) => handleRange(e.target.value)}
-              valueLabelDisplay="auto"
-            />
-          </div>
-        </div>
 
-        <div className="sidebar__option">
-          <div className="optionTitle">
-            <div
-              className="optionColor"
-              style={{ backgroundColor: "blue" }}
-            ></div>
-            <p>Select Color</p>
-          </div>
-          <div className="optionDropdown">
-            <select
-              name="color"
-              id="color"
-              onChange={(e) => handleColor(e.target.value)}
-              disabled={myState.play ? true : false}
-            >
-              <option
-                value="rgb(0, 149, 199)"
-                style={{ color: "rgb(0, 149, 199)" }}
+          <div className="sidebar__option">
+            <div className="optionTitle">
+              <div
+                className="optionColor"
+                style={{ backgroundColor: "blue" }}
+              ></div>
+              <p>Select Color</p>
+            </div>
+            <div className="optionDropdown">
+              <select
+                name="color"
+                id="color"
+                onChange={(e) => handleColor(e.target.value)}
+                disabled={myState.play ? true : false}
               >
-                Blue
-              </option>
-              <option
-                value="rgb(85, 212, 0)"
-                style={{ color: "rgb(10,200,20)" }}
-              >
-                Green
-              </option>
-              <option value="rgb(255, 112, 112)" style={{ color: "red" }}>
-                Red
-              </option>
-              <option value="grey" style={{ color: "grey" }}>
-                Black
-              </option>
-              <option value="#ddd902" style={{ color: "#ddd902" }}>
-                Yellow
-              </option>
-            </select>
+                <option
+                  value="rgb(0, 149, 199)"
+                  style={{ color: "rgb(0, 149, 199)" }}
+                >
+                  Blue
+                </option>
+                <option
+                  value="rgb(85, 212, 0)"
+                  style={{ color: "rgb(10,200,20)" }}
+                >
+                  Green
+                </option>
+                <option value="rgb(255, 112, 112)" style={{ color: "red" }}>
+                  Red
+                </option>
+                <option value="grey" style={{ color: "grey" }}>
+                  Black
+                </option>
+                <option value="#ddd902" style={{ color: "#ddd902" }}>
+                  Yellow
+                </option>
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div className="sidebar__option">
-          <div className="optionTitle">
-            <div
-              className="optionColor"
-              style={{ backgroundColor: "black" }}
-            ></div>
-            <p>Select Speed</p>
+          <div className="sidebar__option">
+            <div className="optionTitle">
+              <div
+                className="optionColor"
+                style={{ backgroundColor: "black" }}
+              ></div>
+              <p>Select Speed</p>
+            </div>
+            <div className="optionDropdown">
+              <select
+                name="speed"
+                defaultValue={100}
+                id="speed"
+                onChange={(e) => handleSpeed(e.target.value)}
+                disabled={myState.play ? true : false}
+              >
+                <option value={500}>Slow</option>
+                <option value={200}>Medium</option>
+                <option value={100}>Fast</option>
+                <option value={20}>Super Fast</option>
+                <option value={5}>Ultra Fast</option>
+              </select>
+            </div>
           </div>
-          <div className="optionDropdown">
-            <select
-              name="speed"
-              defaultValue={100}
-              id="speed"
-              onChange={(e) => handleSpeed(e.target.value)}
-              disabled={myState.play ? true : false}
+        </div>
+        <div className="buttonsAndTimer">
+          <div className="functions">
+            <button id="change-btn" onClick={changeValues}>
+              Change Values
+            </button>
+            <button
+              id="play-btn"
+              onClick={() => {
+                if (time !== 0) {
+                  setTime(0);
+                }
+                handlePlayPause(true);
+              }}
             >
-              <option value={500}>Slow</option>
-              <option value={200}>Medium</option>
-              <option value={100}>Fast</option>
-              <option value={20}>Super Fast</option>
-              <option value={5}>Ultra Fast</option>
-            </select>
+              Sort!
+            </button>
           </div>
-        </div>
-      </div>
-      <div className="buttonsAndTimer">
-        <div className="functions">
-          <button id="change-btn" onClick={changeValues}>
-            Change Values
-          </button>
-          <button id="play-btn" onClick={() => handlePlayPause(true)}>
-            Sort!
-          </button>
-          <button id="play-btn" onClick={() => handlePlayPause(false)}>
-            Stop
-          </button>
-        </div>
-        <div className="timerDiv">
-          <p className="timeDataCont">
-            <span className="timeData">
-              {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:
-            </span>
-            <span className="timeData">
-              {("0" + Math.floor((time / 1000) % 60)).slice(-2)}:
-            </span>
-            <span className="timeData">
-              {("0" + ((time / 10) % 1000)).slice(-2)}
-            </span>
-          </p>
-          {/* <div>
+          <div className="timerDiv">
+            <p className="timeDataCont">
+              <span className="timeData">
+                {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:
+              </span>
+              <span className="timeData">
+                {("0" + Math.floor((time / 1000) % 60)).slice(-2)}:
+              </span>
+              <span className="timeData">
+                {("0" + ((time / 10) % 1000)).slice(-2)}
+              </span>
+            </p>
+            {/* <div>
             <button onClick={() => setStart(true)}>Start</button>
             <button onClick={() => setStart(false)}>Stop</button>
             <button
@@ -310,9 +316,190 @@ function Sidebar() {
               Reset
             </button>
           </div> */}
+          </div>
         </div>
       </div>
-    </div>
+
+      <div className="sidebarMobile">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <div className="hero">
+              <h1 className="title">S O R T I F Y !</h1>
+            </div>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <div className="mobileNavOption">
+                    <div className="optionTitle">
+                      <p>Select Algorithm</p>
+                    </div>
+                    <div className="optionDropdown">
+                      <select
+                        class="form-select form-select-sm"
+                        name="algo"
+                        id="algo"
+                        onChange={(e) => handleAlgo(e.target.value)}
+                        disabled={myState.play ? true : false}
+                      >
+                        {/* <option selected>Select Algo</option> */}
+                        <option value="bubble">Bubble Sort </option>
+                        <option value="merge">Merge Sort</option>
+                        <option value="insertion">Insertion Sort</option>
+                        <option value="selection">Selection Sort</option>
+                        <option value="quick">Quick Sort</option>
+                      </select>
+                    </div>
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <div className="optionTitle">
+                    <div
+                      className="optionColor"
+                      style={{ backgroundColor: "cornsilk" }}
+                    ></div>
+                    <p>Select Range</p>
+                  </div>
+                  <div className="optionDropdown">
+                    <Slider
+                      style={{ width: "180px" }}
+                      size="small"
+                      defaultValue={60}
+                      id="slider"
+                      min={1}
+                      className="slider"
+                      disabled={myState.play ? true : false}
+                      max={max}
+                      onChange={(e) => handleRange(e.target.value)}
+                      valueLabelDisplay="auto"
+                    />
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <div className="optionTitle">
+                    <div
+                      className="optionColor"
+                      style={{ backgroundColor: "blue" }}
+                    ></div>
+                    <p>Select Color</p>
+                  </div>
+                  <div className="optionDropdown">
+                    <select
+                      name="color"
+                      id="color"
+                      onChange={(e) => handleColor(e.target.value)}
+                      disabled={myState.play ? true : false}
+                    >
+                      <option
+                        value="rgb(0, 149, 199)"
+                        style={{ color: "rgb(0, 149, 199)" }}
+                      >
+                        Blue
+                      </option>
+                      <option
+                        value="rgb(85, 212, 0)"
+                        style={{ color: "rgb(10,200,20)" }}
+                      >
+                        Green
+                      </option>
+                      <option
+                        value="rgb(255, 112, 112)"
+                        style={{ color: "red" }}
+                      >
+                        Red
+                      </option>
+                      <option value="grey" style={{ color: "grey" }}>
+                        Black
+                      </option>
+                      <option value="#ddd902" style={{ color: "#ddd902" }}>
+                        Yellow
+                      </option>
+                    </select>
+                  </div>
+                </li>
+                <li className="nav-item">
+                  <div className="optionTitle">
+                    <div
+                      className="optionColor"
+                      style={{ backgroundColor: "black" }}
+                    ></div>
+                    <p>Select Speed</p>
+                  </div>
+                  <div className="optionDropdown">
+                    <select
+                      name="speed"
+                      defaultValue={100}
+                      id="speed"
+                      onChange={(e) => handleSpeed(e.target.value)}
+                      disabled={myState.play ? true : false}
+                    >
+                      <option value={500}>Slow</option>
+                      <option value={200}>Medium</option>
+                      <option value={100}>Fast</option>
+                      <option value={20}>Super Fast</option>
+                      <option value={5}>Ultra Fast</option>
+                    </select>
+                  </div>
+                </li>
+              </ul>
+              <div className="buttonsAndTimer">
+                <div className="functions">
+                  <button id="change-btn" onClick={changeValues}>
+                    Change Values
+                  </button>
+                  <button
+                    id="play-btn"
+                    onClick={() => {
+                      if (time !== 0) {
+                        setTime(0);
+                      }
+                      handlePlayPause(true);
+                    }}
+                  >
+                    Sort!
+                  </button>
+                </div>
+                <div className="timerDiv">
+                  <p className="timeDataCont">
+                    <span className="timeData">
+                      {("0" + Math.floor((time / 60000) % 60)).slice(-2)}:
+                    </span>
+                    <span className="timeData">
+                      {("0" + Math.floor((time / 1000) % 60)).slice(-2)}:
+                    </span>
+                    <span className="timeData">
+                      {("0" + ((time / 10) % 1000)).slice(-2)}
+                    </span>
+                  </p>
+                  {/* <div>
+            <button onClick={() => setStart(true)}>Start</button>
+            <button onClick={() => setStart(false)}>Stop</button>
+            <button
+              onClick={() => {
+                setTime(0);
+                setStart(false);
+              }}
+            >
+              Reset
+            </button>
+          </div> */}
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </>
   );
 }
 
